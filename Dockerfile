@@ -9,14 +9,11 @@ MAINTAINER VRT Engineering <engineering@vrt.com.au>
 RUN groupadd -r grafana && useradd -r -g grafana grafana
 
 
-ENV GRAFANA_VERSION 2.0.2
-
-COPY grafana_2.0.2-singlestat-image_amd64.deb /tmp/
+COPY grafana_latest_amd64.deb /tmp/
 
 RUN apt-get update && apt-get -y install libfontconfig adduser openssl ca-certificates \
-	&& curl https://grafanarel.s3.amazonaws.com/builds/grafana_${GRAFANA_VERSION}_amd64.deb > /tmp/grafana_amd64.deb \
-        && dpkg -i /tmp/grafana_*.deb \
-        && rm /tmp/grafana_*.deb \
+        && dpkg -i /tmp/grafana_latest_amd64.deb \
+        && rm /tmp/grafana_latest_amd64.deb \
         && rm -rf /var/lib/apt/lists/*
 
 
